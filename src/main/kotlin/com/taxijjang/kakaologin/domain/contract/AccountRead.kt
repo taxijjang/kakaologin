@@ -1,7 +1,7 @@
 package com.taxijjang.kakaologin.domain.contract
 
-import com.taxijjang.kakaologin.domain.entity.Account
-import com.taxijjang.kakaologin.domain.entity.AccountStatus
+import com.taxijjang.kakaologin.domain.entity.account.Account
+import com.taxijjang.kakaologin.domain.entity.account.AccountStatus
 import java.time.ZonedDateTime
 import java.util.*
 

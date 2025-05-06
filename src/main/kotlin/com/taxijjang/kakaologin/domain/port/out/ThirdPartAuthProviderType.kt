@@ -1,7 +1,6 @@
 package com.taxijjang.kakaologin.domain.port.out
 
-import com.taxijjang.kakaologin.domain.entity.IdentifierType
-import org.intellij.lang.annotations.Identifier
+import com.taxijjang.kakaologin.domain.entity.account.IdentifierType
 
 enum class ThirdPartyAuthProviderType(val code: String) {
     KAKAO("kakao"),

@@ -1,7 +1,7 @@
 package com.taxijjang.kakaologin.domain.service
 
 import com.taxijjang.kakaologin.domain.contract.AccountRead
-import com.taxijjang.kakaologin.domain.entity.Account
+import com.taxijjang.kakaologin.domain.entity.account.Account
 import com.taxijjang.kakaologin.domain.port.out.ThirdPartyUserAttribute
 import com.taxijjang.kakaologin.domain.repository.AccountRepository
 import com.taxijjang.kakaologin.domain.usecase.SignInOrSignUpUseCase

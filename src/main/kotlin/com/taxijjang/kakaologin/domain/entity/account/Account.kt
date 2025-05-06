@@ -1,4 +1,4 @@
-package com.taxijjang.kakaologin.domain.entity
+package com.taxijjang.kakaologin.domain.entity.account
 
 import com.taxijjang.kakaologin.domain.contract.EmailAddress
 import jakarta.persistence.*
@@ -32,7 +32,7 @@ class Account(
     @OneToMany(
         mappedBy = "account",
         cascade = [CascadeType.ALL],
-        fetch = FetchType.LAZY,
+        fetch = FetchType.EAGER,
     )
     private val identifiers: MutableSet<AccountIdentifier> = mutableSetOf()
 

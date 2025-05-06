@@ -1,10 +1,10 @@
 package com.taxijjang.kakaologin.application.repository
 
 import com.querydsl.jpa.impl.JPAQueryFactory
-import com.taxijjang.kakaologin.domain.entity.Account
-import com.taxijjang.kakaologin.domain.entity.IdentifierType
-import com.taxijjang.kakaologin.domain.entity.QAccount.account
-import com.taxijjang.kakaologin.domain.entity.QAccountIdentifier.accountIdentifier
+import com.taxijjang.kakaologin.domain.entity.account.Account
+import com.taxijjang.kakaologin.domain.entity.account.IdentifierType
+import com.taxijjang.kakaologin.domain.entity.account.QAccount.account
+import com.taxijjang.kakaologin.domain.entity.account.QAccountIdentifier.accountIdentifier
 import com.taxijjang.kakaologin.domain.exception.NotFoundAccount
 import com.taxijjang.kakaologin.domain.repository.AccountRepository
 import org.springframework.data.jpa.repository.JpaRepository
@@ -22,10 +22,13 @@ class AccountRepositoryImpl(
     }
 
     override fun getByKey(key: UUID): Account {
-        return queryFactory.selectFrom(account)
+        return queryFactory
+            .selectFrom(account)
+            .leftJoin(account.identifiers, accountIdentifier).fetchJoin() // ← 여기도!
             .where(account.key.eq(key))
             .fetchOne() ?: throw NotFoundAccount(key)
     }
+
 
     override fun findByKey(key: UUID): Account? {
         return queryFactory.selectFrom(account)
@@ -34,14 +37,15 @@ class AccountRepositoryImpl(
     }
 
     override fun findByIdentifier(type: IdentifierType, value: String): Account? {
-        return queryFactory.selectFrom(accountIdentifier)
+        return queryFactory
+            .select(account) // ✅ account를 select
+            .from(accountIdentifier)
+            .join(accountIdentifier.account, account)
             .where(
-                accountIdentifier.type.eq(type).and(
-                    accountIdentifier.originValue.eq(value)
-                )
-            ).fetchOne().let {
-                it?.account
-            }
+                accountIdentifier.type.eq(type)
+                    .and(accountIdentifier.originValue.eq(value))
+            )
+            .fetchOne()
     }
 }
 

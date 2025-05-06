@@ -1,4 +1,4 @@
-package com.taxijjang.kakaologin.domain.entity
+package com.taxijjang.kakaologin.domain.entity.account
 
 import jakarta.persistence.*
 import java.time.ZonedDateTime
