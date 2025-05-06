@@ -2,8 +2,11 @@ package com.taxijjang.kakaologin.application.port.out
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.taxijjang.kakaologin.domain.entity.port.out.AgreeTermsType
-import com.taxijjang.kakaologin.domain.entity.port.out.SocialAgreeTerms
+import com.taxijjang.kakaologin.domain.contract.EmailAddress
+import com.taxijjang.kakaologin.domain.port.out.AgreeTermsType
+import com.taxijjang.kakaologin.domain.port.out.SocialAgreeTerms
+import com.taxijjang.kakaologin.domain.port.out.ThirdPartyAuthProviderType
+import com.taxijjang.kakaologin.domain.port.out.ThirdPartyUserAttribute
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestHeader
@@ -76,15 +79,30 @@ data class KakaoUserAttribute(
     val properties: KakaoUserAttributeProperties,
     @JsonProperty("kakao_account")
     val kakaoAccount: KakaoUserAttributeKakaoAccount
-)
+) {
+    fun toAttribute(): ThirdPartyUserAttribute {
+        return ThirdPartyUserAttribute(
+            id = id,
+            provider = ThirdPartyAuthProviderType.KAKAO,
+            email = if (kakaoAccount.email != null) {
+                EmailAddress(kakaoAccount.email)
+            }
+            else {
+                null
+            },
+            name = properties.nickname,
+            profileImage = properties.profileImage,
+        )
+    }
+}
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class KakaoUserAttributeProperties(
-    val nickname: String,
+    val nickname: String? = null,
     @JsonProperty("profile_image")
-    val profileImage: String = "",
+    val profileImage: String? = null,
     @JsonProperty("thumbnail_image")
-    val thumbnailImage: String = "",
+    val thumbnailImage: String? = null,
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -111,7 +129,7 @@ data class KakaoUserAttributeKakaoAccount(
     val nameNeedsAgreement: Boolean = false,
 
     // 카카오계정 이름
-    val name: String = "",
+    val name: String? = null,
 
     // 사용자 동의 시 카카오계정 대표 이메일 제공 가능
     @JsonProperty("email_needs_agreement")
@@ -126,7 +144,7 @@ data class KakaoUserAttributeKakaoAccount(
     val isEmailVerified: Boolean = false,
 
     // 카카오계정 대표 이메일
-    val email: String,
+    val email: String? = null,
 
     // 사용자 동의 시 연령대 제공 가능
     @JsonProperty("age_range_needs_agreement")

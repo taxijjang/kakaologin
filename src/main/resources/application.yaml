@@ -1,3 +1,14 @@
 spring:
-  application:
-    name:kakaologin
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+        time_zone: UTC
+        default_batch_fetch_size: 100
+  datasource:
+    url: jdbc:mysql://localhost:14432/taxijjang?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.jdbc.Driver

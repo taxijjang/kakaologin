@@ -1,4 +1,4 @@
-package com.taxijjang.kakaologin.domain.entity.port.out
+package com.taxijjang.kakaologin.domain.port.out
 
 import com.taxijjang.kakaologin.domain.contract.EmailAddress
 import java.time.ZonedDateTime
@@ -6,8 +6,8 @@ import java.time.ZonedDateTime
 data class ThirdPartyUserAttribute(
     val id: String,
     val provider: ThirdPartyAuthProviderType,
-    val email: EmailAddress,
-    val name: String,
+    val email: EmailAddress? = null,
+    val name: String? = null,
     val profileImage: String? = null,
 
     // ex) +821063110710
