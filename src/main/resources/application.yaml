@@ -1,3 +1,6 @@
+server:
+  address: 0.0.0.0
+  port: 8080
 spring:
   jpa:
     hibernate:
@@ -8,7 +11,8 @@ spring:
         time_zone: UTC
         default_batch_fetch_size: 100
   datasource:
-    url: jdbc:mysql://localhost:14432/taxijjang?useUnicode=true&characterEncoding=utf8&useSSL=false
+#    url: jdbc:mysql://localhost:14432/taxijjang?useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://host.docker.internal:14432/taxijjang
     username: root
     password: 1234
     driver-class-name: com.mysql.jdbc.Driver
