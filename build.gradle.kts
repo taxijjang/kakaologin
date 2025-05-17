@@ -16,6 +16,10 @@ java {
 	}
 }
 
+tasks.getByName<Jar>("jar") {
+	enabled = false
+}
+
 repositories {
 	mavenCentral()
 }

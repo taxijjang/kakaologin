@@ -13,7 +13,7 @@ FROM openjdk:17-ea-17-jdk-slim
 WORKDIR /app
 
 # 빌드된 jar만 복사
-COPY --from=builder /app/build/libs/kakaologin-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=builder /app/build/libs/*.jar app.jar
 
 EXPOSE 15232
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
