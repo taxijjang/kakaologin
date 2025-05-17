@@ -14,11 +14,20 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
 
 logging:
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+#  pattern:
+#    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
   level:
     root: INFO               # 전체 기본 로그 레벨
     org.springframework.web: DEBUG  # 웹 요청 관련 로그
     org.hibernate.SQL: DEBUG        # 실행되는 SQL 쿼리
     org.hibernate.type.descriptor.sql: TRACE  # 바인딩 값
     com.taxijjang: DEBUG     # 우리 앱 패키지 로그
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger
+    operations-sorter: method
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json

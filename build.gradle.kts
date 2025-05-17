@@ -40,6 +40,10 @@ dependencies {
 	implementation("com.querydsl:querydsl-jpa:5.0.0:jakarta") // jakarta 버전 사용
 	kapt("com.querydsl:querydsl-apt:5.0.0:jakarta") // Q 클래스 생성용
 
+	// Swagger
+	implementation("org.springdoc:springdoc-openapi-ui:1.6.14")
+	implementation("org.springdoc:springdoc-openapi-kotlin:1.6.14")
+
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 
 	runtimeOnly("com.mysql:mysql-connector-j")

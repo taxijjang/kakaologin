@@ -20,8 +20,10 @@ class SecurityConfig(
         return http
             .csrf { it.disable() }
             .authorizeHttpRequests {
-                it.requestMatchers("/auth/kakao").permitAll()
-                it.anyRequest().authenticated()
+                it.requestMatchers("/account/**").authenticated()
+//                it.requestMatchers("/swagger-ui/**").permitAll()
+//                it.requestMatchers("/auth/kakao").permitAll()
+                it.anyRequest().permitAll()
 //                it.anyRequest().permitAll()
             }
             .addFilterBefore(
